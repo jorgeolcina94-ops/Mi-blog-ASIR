@@ -32,6 +32,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
 <main class="container">
     <h2 class="section-title">Panel de Administración</h2>
+	<div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px;">
+        <p>Conectado como: <strong><?php echo $_SESSION['usuario_nom']; ?></strong></p>
+        <a href="logout.php" class="btn" style="background: #da3633; border-color: #da3633; padding: 5px 15px; font-size: 0.8rem;">Cerrar Sesión</a>
+	</div>
     <div class="card" style="max-width: 600px; margin: 0 auto;">
         <h3>Nueva Publicación</h3>
         <?php echo $mensaje; ?>
