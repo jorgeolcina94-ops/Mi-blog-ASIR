@@ -16,10 +16,18 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $resumen = $_POST['resumen'];
     $contenido = $_POST['contenido'];
     $categoria = $_POST['categoria'];
+    $imagen_url = "";
+if (isset($_FILES['imagen']) && $_FILES['imagen']['error'] === 0) {
+    $nombre_archivo = time() . "_" . $_FILES['imagen']['name'];
+    $ruta_destino = "uploads/" . $nombre_archivo;
+    
+    if (move_uploaded_file($_FILES['imagen']['tmp_name'], $ruta_destino)) {
+        $imagen_url = $ruta_destino;
+    }
 
     // Uso de Sentencias Preparadas (Seguridad fundamental en ASIR)
-    $stmt = $conn->prepare("INSERT INTO publicaciones (titulo, resumen, contenido, categoria) VALUES (?, ?, ?, ?)");
-    $stmt->bind_param("ssss", $titulo, $resumen, $contenido, $categoria);
+    $stmt = $conn->prepare("INSERT INTO publicaciones (titulo, resumen, contenido, categoria, imagen_url) VALUES (?, ?, ?, ?)");
+    $stmt->bind_param("ssss", $titulo, $resumen, $contenido, $categoria, $imagen_url);
 
     if ($stmt->execute()) {
         $mensaje = "<p style='color: #238636;'>✔ Publicación creada con éxito.</p>";
@@ -40,7 +48,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         <h3>Nueva Publicación</h3>
         <?php echo $mensaje; ?>
         
-        <form action="admin.php" method="POST" style="display: flex; flex-direction: column; gap: 1rem;">
+        <form action="admin.php" method="POST" enctype="multipart/form-data" style="display: flex; flex-direction: column; gap: 1rem;">
             <input type="text" name="titulo" placeholder="Título del artículo" required 
                    style="padding: 10px; background: #0d1117; border: 1px solid #30363d; color: white;">
             
@@ -52,7 +60,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             
             <textarea name="contenido" placeholder="Escribe aquí todo el contenido técnico..." rows="10" required
                       style="padding: 10px; background: #0d1117; border: 1px solid #30363d; color: white;"></textarea>
-            
+
+            <input type="file" name="imagen" accept="image/*" style="color: white; margin-bottom: 10px;">
+
             <button type="submit" class="btn">Publicar en el Blog</button>
         </form>
         <br>

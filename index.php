@@ -30,6 +30,7 @@ $resultado = $conn->query($sql);
                         <span><?php echo htmlspecialchars($row['categoria']); ?></span>
                         <h3><?php echo htmlspecialchars($row['titulo']); ?></h3>
                         <p><?php echo htmlspecialchars($row['resumen']); ?></p>
+			<a href="post.php?id=<?php echo $row['id']; ?>" class="read-more">Leer más &rarr;</a>
                         <small style="color: var(--text-muted); font-size: 0.7rem;">
                             Publicado el: <?php echo date("d/m/Y", strtotime($row['fecha_publicacion'])); ?>
                         </small>
