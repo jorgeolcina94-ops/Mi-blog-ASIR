@@ -1,4 +1,12 @@
-<?php include('includes/header.php'); ?>
+<?php 
+// 1. Incluimos la cabecera y la conexión a la base de datos
+include('includes/header.php'); 
+include('db/db_config.php'); 
+
+// 2. Preparamos la consulta SQL para traer los artículos más recientes
+$sql = "SELECT titulo, resumen, categoria, fecha_publicacion FROM publicaciones ORDER BY fecha_publicacion DESC";
+$resultado = $conn->query($sql);
+?>
 
 <main class="container">
     <header class="hero">
@@ -6,23 +14,33 @@
             <span class="status-dot"></span> System Status: Online
         </div>
         <h1>Diario de un Administrador de Sistemas</h1>
-        <p>Documentando laboratorios, despliegues y soluciones técnicas en mi Raspberry Pi.</p>
+        <p>Documentando laboratorios y despliegues en mi Raspberry Pi 3A+.</p>
     </header>
 
     <section id="labs">
         <h2 class="section-title">01. Laboratorios Recientes</h2>
         <div class="lab-grid">
-            <article class="card">
-                <span>Database</span>
-                <h3>Instalación de MariaDB</h3>
-                <p>Configuración inicial del motor de base de datos y securización con mysql_secure_installation.</p>
-            </article>
+            
+            <?php
+            // 3. Verificamos si hay resultados y los mostramos
+            if ($resultado->num_rows > 0) {
+                while($row = $resultado->fetch_assoc()) {
+                    ?>
+                    <article class="card">
+                        <span><?php echo htmlspecialchars($row['categoria']); ?></span>
+                        <h3><?php echo htmlspecialchars($row['titulo']); ?></h3>
+                        <p><?php echo htmlspecialchars($row['resumen']); ?></p>
+                        <small style="color: var(--text-muted); font-size: 0.7rem;">
+                            Publicado el: <?php echo date("d/m/Y", strtotime($row['fecha_publicacion'])); ?>
+                        </small>
+                    </article>
+                    <?php
+                }
+            } else {
+                echo "<p>No hay publicaciones todavía. ¡Abre la terminal de MariaDB e inserta una!</p>";
+            }
+            ?>
 
-            <article class="card">
-                <span>Redes</span>
-                <h3>Túnel de Cloudflare</h3>
-                <p>Exponiendo mi servidor local de forma segura sin abrir puertos en el router.</p>
-            </article>
         </div>
     </section>
 
@@ -30,13 +48,14 @@
         <h2 class="section-title">02. Scripts de Automatización</h2>
         <div class="card" style="width: 100%;">
             <span>Bash</span>
-            <h3>Update & Upgrade Automático</h3>
-            <div class="script-preview">
-                <span style="color: #ff7b72;">#!/bin/bash</span><br>
-                sudo apt update && sudo apt upgrade -y
-            </div>
+            <h3>Sync GitHub</h3>
+            <p>Automatizando el despliegue de mi blog.</p>
         </div>
     </section>
 </main>
 
-<?php include('includes/footer.php'); ?>
+<?php 
+// 4. Cerramos la conexión para liberar recursos y cargamos el footer
+$conn->close();
+include('includes/footer.php'); 
+?>
