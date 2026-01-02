@@ -1,0 +1,6 @@
+# Ignorar archivos de configuración con contraseñas
+db/db_config.php
+
+# Ignorar archivos temporales y logs
+*.log
+.DS_Store
