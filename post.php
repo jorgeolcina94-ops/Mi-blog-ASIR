@@ -1,36 +1,3 @@
-<script>
-document.addEventListener('DOMContentLoaded', () => {
-    console.log("Script de copiado cargado"); // Verifica esto en F12
-    
-    document.querySelectorAll('pre').forEach((block) => {
-        // Crear el botón manualmente
-        const button = document.createElement('button');
-        button.className = 'copy-button';
-        button.type = 'button';
-        button.innerText = '📋 Copiar';
-        
-        // Insertarlo en el bloque de código
-        block.appendChild(button);
-
-        button.addEventListener('click', () => {
-            // Clonamos el bloque para quitar el texto del propio botón antes de copiar
-            const contentToCopy = block.innerText.replace('📋 Copiar', '').trim();
-            
-            navigator.clipboard.writeText(contentToCopy).then(() => {
-                button.innerText = '✅ ¡Copiado!';
-                button.classList.add('copied'); // Añade el estilo verde brillante
-                setTimeout(() => {
-                    button.innerText = '📋 Copiar';
-                    button.classList.remove('copied'); // Vuelve al estilo original
-                }, 2000);
-            }).catch(err => {
-                console.error('Error al copiar: ', err);
-            });
-        });
-    });
-});
-</script>
-
 
 <?php 
 include('includes/header.php'); 

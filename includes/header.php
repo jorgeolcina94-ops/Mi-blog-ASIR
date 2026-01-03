@@ -15,5 +15,6 @@
             <a href="index.php">Inicio</a>
             <a href="#labs">Laboratorios</a>
             <a href="#scripts">Scripts</a>
+	    <a href="recursos.php">Recursos</a>
         </div>
     </nav>

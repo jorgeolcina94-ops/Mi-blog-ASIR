@@ -268,13 +268,18 @@
 }
 /* Contenedor del código */
 pre {
-    position: relative; /* Necesario para posicionar el botón */
-    padding-top: 35px !important; /* Espacio para que el botón no tape el comando */
-    background: #0d1117;
-    border: 1px solid #30363d;
-    border-radius: 8px;
-    color: #e6edf3;
-    font-family: 'Fira Code', monospace;
+    position: relative;
+    background: #010409 !important;
+    padding: 2.5rem 1rem 1rem 1rem !important; /* Más espacio arriba para el botón */
+    border: 1px solid #30363d !important;
+    border-radius: 8px !important;
+    overflow-x: auto !important;
+    white-space: pre;
+    margin: 1.5rem 0;
+
+    /* REGLA PARA FIREFOX */
+    scrollbar-width: thin;
+    scrollbar-color: #30363d #010409; /* Color de la barra y color del fondo */
 }
 
 /* Estilo profesional para el botón */
@@ -293,6 +298,8 @@ pre {
     cursor: pointer;
     transition: all 0.2s ease;
     text-transform: uppercase;
+    z-index: 10; /* Asegura que esté por encima de todo */
+    backdrop-filter: blur(4px); /* Efecto cristal para que no tape el código */
 }
 
 /* Efecto al pasar el ratón */
@@ -329,4 +336,29 @@ pre {
 @keyframes terminal-blink {
     0%, 100% { opacity: 1; }
     50% { opacity: 0; }
+}
+/* --- Personalización de la "Barra Fea" (Scrollbar) --- */
+/* --- REGLAS PARA CHROME, EDGE Y SAFARI --- */
+/* 1. Ancho de la barra */
+pre::-webkit-scrollbar {
+    height: 8px !important; /* Barra horizontal */
+    width: 8px !important;  /* Barra vertical (si existiera) */
+}
+
+/* 2. Fondo del carril */
+pre::-webkit-scrollbar-track {
+    background: #010409 !important; 
+    border-radius: 8px;
+}
+
+/* 3. La parte que se mueve (el "pulgar") */
+pre::-webkit-scrollbar-thumb {
+    background-color: #30363d !important;
+    border-radius: 20px !important;
+    border: 2px solid #010409 !important; /* Crea un pequeño margen visual */
+}
+
+/* 4. Cuando pasas el ratón por encima */
+pre::-webkit-scrollbar-thumb:hover {
+    background-color: var(--accent-color) !important;
 }

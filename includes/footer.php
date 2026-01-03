@@ -1,3 +1,28 @@
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+    // Buscamos todos los bloques <pre> en cualquier página
+    document.querySelectorAll('pre').forEach((block) => {
+        // Creamos el botón
+        const button = document.createElement('button');
+        button.className = 'copy-button';
+        button.type = 'button';
+        button.innerText = '📋 COPIAR';
+        
+        // Lo metemos dentro del bloque de código
+        block.appendChild(button);
+
+        button.addEventListener('click', () => {
+            // Limpiamos el texto para no copiar la palabra "COPIAR"
+            const textToCopy = block.innerText.replace('📋 COPIAR', '').trim();
+            
+            navigator.clipboard.writeText(textToCopy).then(() => {
+                button.innerText = '✅ LISTO';
+                setTimeout(() => button.innerText = '📋 COPIAR', 2000);
+            });
+        });
+    });
+});
+</script>
 <footer>
         <p>&copy; <?php echo date("Y"); ?> - Desplegado en Raspberry Pi 3A+ | Jorge Olcina</p>
     </footer>
