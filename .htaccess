@@ -20,3 +20,10 @@ Header set X-Frame-Options "SAMEORIGIN"
 Header set X-XSS-Protection "1; mode=block"
 Header set X-Content-Type-Options "nosniff"
 Header set Referrer-Policy "strict-origin-when-cross-origin"
+
+
+# Forzar que los archivos .sh se descarguen o se vean como texto plano
+<FilesMatch "\.sh$">
+    ForceType text/plain
+    Header set Content-Disposition "inline"
+</FilesMatch>

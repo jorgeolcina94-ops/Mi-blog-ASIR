@@ -45,6 +45,26 @@ SELECT * FROM publicaciones;            # Ver datos de una tabla</pre>
             <a href="index.php" class="btn" style="text-decoration: none;">&larr; Volver al Inicio</a>
         </footer>
     </article>
+<h2 style="margin-top: 3rem; color: var(--accent-color);">📜 Scripts de Automatización</h2>
+<p>Herramientas listas para ejecutar. Úsalas bajo tu propia responsabilidad en entornos de pruebas.</p>
+
+<div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; margin-top: 20px;">
+    
+    <div class="card" style="border: 1px solid #30363d; background: #0d1117;">
+        <h4 style="margin-top: 0;">💾 Auto-Backup LAMP</h4>
+        <p style="font-size: 0.85rem; color: var(--text-muted);">Respalda base de datos y archivos web en un .tar.gz con rotación de 7 días.</p>
+        <pre style="font-size: 0.75rem; padding: 10px !important;">curl -s https://yoryo.es/scripts/backup.sh | bash</pre>
+        <a href="/scripts/backup.sh" download style="font-size: 0.8rem; color: var(--accent-color); text-decoration: none;">[ 📥 Descargar .sh ]</a>
+    </div>
+
+    <div class="card" style="border: 1px solid #30363d; background: #0d1117;">
+        <h4 style="margin-top: 0;">🛡️ Server Hardening</h4>
+        <p style="font-size: 0.85rem; color: var(--text-muted);">Configuración básica de UFW, Fail2Ban y deshabilitar login de root por SSH.</p>
+        <pre style="font-size: 0.75rem; padding: 10px !important;">sudo bash scripts/secure_me.sh</pre>
+        <a href="#" style="font-size: 0.8rem; color: #8b949e; text-decoration: none; cursor: not-allowed;">[ Próximamente ]</a>
+    </div>
+
+</div>
 </main>
 
 <script>

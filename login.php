@@ -54,6 +54,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         $log->bind_param("s", $ip);
         $log->execute();
     }
+  }
 }
 ?>
 
