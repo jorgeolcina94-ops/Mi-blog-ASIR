@@ -149,6 +149,35 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </tbody>
     </table>
 </section>
+<hr style="margin: 3rem 0; border: 0; border-top: 1px solid var(--border-color);">
+
+<section>
+    <h3>🚨 Últimos Intentos de Acceso</h3>
+    <table style="width: 100%; border-collapse: collapse; margin-top: 1rem; background: var(--bg-card); border-radius: 8px;">
+        <thead>
+            <tr style="background: #161b22; text-align: left;">
+                <th style="padding: 12px;">IP</th>
+                <th style="padding: 12px;">Fecha</th>
+                <th style="padding: 12px;">Estado</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+            $sql_logs = "SELECT ip_address, intento_fecha, exitoso FROM login_attempts ORDER BY intento_fecha DESC LIMIT 5";
+            $res_logs = $conn->query($sql_logs);
+            while($log = $res_logs->fetch_assoc()):
+            ?>
+            <tr style="border-bottom: 1px solid #21262d;">
+                <td style="padding: 12px;"><?php echo $log['ip_address']; ?></td>
+                <td style="padding: 12px;"><?php echo date("d/m H:i", strtotime($log['intento_fecha'])); ?></td>
+                <td style="padding: 12px;">
+                    <?php echo $log['exitoso'] ? '<span style="color: #238636;">Éxito</span>' : '<span style="color: #da3633;">FALLO</span>'; ?>
+                </td>
+            </tr>
+            <?php endwhile; ?>
+        </tbody>
+    </table>
+</section>
 <?php 
 $conn->close();
 include('includes/footer.php'); 

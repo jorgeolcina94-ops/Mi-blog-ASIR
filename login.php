@@ -7,7 +7,7 @@ $error = "";
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $user = $_POST['username'];
     $pass = $_POST['password'];
-
+    $ip = $_SERVER['HTTP_CF_CONNECTING_IP'] ?? $_SERVER['REMOTE_ADDR'];
     $stmt = $conn->prepare("SELECT id, password FROM usuarios WHERE username = ?");
     $stmt->bind_param("s", $user);
     $stmt->execute();
@@ -19,13 +19,26 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (password_verify($pass, $usuario['password'])) {
             $_SESSION['usuario_id'] = $usuario['id'];
             $_SESSION['usuario_nom'] = $user;
+
+            $log = $conn->prepare("INSERT INTO login_attempts (ip_address, exitoso) VALUES (?, 1)");
+            $log->bind_param("s", $ip);
+            $log->execute();
+
             header("Location: admin/admin.php");
             exit();
         } else {
             $error = "Contraseña incorrecta.";
+
+            $log = $conn->prepare("INSERT INTO login_attempts (ip_address, exitoso) VALUES (?, 0)");
+            $log->bind_param("s", $ip);
+            $log->execute();
         }
     } else {
         $error = "El usuario no existe.";
+
+        $log = $conn->prepare("INSERT INTO login_attempts (ip_address, exitoso) VALUES (?, 0)");
+        $log->bind_param("s", $ip);
+        $log->execute();
     }
 }
 ?>
