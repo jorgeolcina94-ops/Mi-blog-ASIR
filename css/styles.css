@@ -362,3 +362,38 @@ pre::-webkit-scrollbar-thumb {
 pre::-webkit-scrollbar-thumb:hover {
     background-color: var(--accent-color) !important;
 }
+
+
+/* --- Ajustes para Móviles y Tablets --- */
+@media (max-width: 768px) {
+    /* Hacemos que el contenedor principal use todo el ancho */
+    .container {
+        width: 95% !important;
+        padding: 10px !important;
+    }
+
+    /* Ajustamos la terminal (bloque PRE) */
+    pre {
+        font-size: 0.85rem !important; /* Aumentamos un poco el tamaño para legibilidad */
+        padding: 2.5rem 0.7rem 1rem 0.7rem !important; /* Reducimos el padding lateral */
+        line-height: 1.4 !important;
+        border-radius: 4px !important;
+    }
+
+    /* El botón de copiar debe ser más grande para que sea fácil de pulsar con el dedo */
+    .copy-button {
+        padding: 8px 12px !important;
+        font-size: 0.75rem !important;
+        top: 5px;
+        right: 5px;
+    }
+
+    /* Ajustamos los títulos para que no ocupen toda la pantalla */
+    h1 {
+        font-size: 1.5rem !important;
+    }
+    
+    h2 {
+        font-size: 1.2rem !important;
+    }
+}
