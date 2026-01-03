@@ -99,6 +99,56 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </tbody>
     </table>
 </section>
+<hr style="margin: 3rem 0; border: 0; border-top: 1px solid var(--border-color);">
+
+<section>
+    <h3>Moderación de Comentarios</h3>
+    <table style="width: 100%; border-collapse: collapse; margin-top: 1rem; background: var(--bg-card); border-radius: 8px; overflow: hidden;">
+        <thead>
+            <tr style="background: #161b22; text-align: left;">
+                <th style="padding: 12px; border-bottom: 1px solid var(--border-color);">Usuario</th>
+                <th style="padding: 12px; border-bottom: 1px solid var(--border-color);">Comentario</th>
+                <th style="padding: 12px; border-bottom: 1px solid var(--border-color);">En el Post</th>
+                <th style="padding: 12px; border-bottom: 1px solid var(--border-color);">Acción</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+            // Consulta con JOIN para saber el título del post al que pertenece el comentario
+            $sql_com = "SELECT c.id, c.nombre, c.comentario, p.titulo 
+                        FROM comentarios c 
+                        JOIN publicaciones p ON c.post_id = p.id 
+                        ORDER BY c.fecha DESC LIMIT 10";
+            $res_com = $conn->query($sql_com);
+
+            if ($res_com->num_rows > 0) {
+                while($com = $res_com->fetch_assoc()):
+                ?>
+                <tr style="border-bottom: 1px solid #21262d;">
+                    <td style="padding: 12px; font-weight: bold; color: var(--accent-color);">
+                        <?php echo htmlspecialchars($com['nombre']); ?>
+                    </td>
+                    <td style="padding: 12px; font-size: 0.9rem;">
+                        <?php echo mb_strimwidth(htmlspecialchars($com['comentario']), 0, 50, "..."); ?>
+                    </td>
+                    <td style="padding: 12px; font-style: italic; color: var(--text-muted);">
+                        <?php echo htmlspecialchars($com['titulo']); ?>
+                    </td>
+                    <td style="padding: 12px;">
+                        <a href="eliminar_comentario.php?id=<?php echo $com['id']; ?>" 
+                           onclick="return confirm('¿Eliminar este comentario?');" 
+                           style="color: #da3633; text-decoration: none;">[ Borrar ]</a>
+                    </td>
+                </tr>
+                <?php 
+                endwhile; 
+            } else {
+                echo "<tr><td colspan='4' style='padding:20px; text-align:center;'>No hay comentarios pendientes.</td></tr>";
+            }
+            ?>
+        </tbody>
+    </table>
+</section>
 <?php 
 $conn->close();
 include('includes/footer.php'); 
