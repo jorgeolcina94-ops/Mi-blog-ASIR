@@ -4,7 +4,7 @@ include('includes/header.php');
 include('db/db_config.php'); 
 
 // 2. Preparamos la consulta SQL para traer los artículos más recientes
-$sql = "SELECT titulo, resumen, categoria, fecha_publicacion FROM publicaciones ORDER BY fecha_publicacion DESC";
+$sql = "SELECT id, titulo, resumen, categoria, fecha_publicacion FROM publicaciones ORDER BY fecha_publicacion DESC";
 $resultado = $conn->query($sql);
 ?>
 
