@@ -3,3 +3,20 @@ ErrorDocument 404 /error404.php
 
 # Opcional: Impedir que se listen las carpetas si no hay un index.php
 Options -Indexes
+
+# Forzar HTTPS (Si no lo hace ya Cloudflare)
+RewriteEngine On
+RewriteCond %{HTTP:X-Forwarded-Proto} !https
+RewriteRule ^(.*)$ https://%{HTTP_HOST}/$1 [R=301,L]
+
+# Proteger archivos de configuración y logs
+<FilesMatch "^\.|\.(config|ini|log|sh|sql)$">
+    Order allow,deny
+    Deny from all
+</FilesMatch>
+
+# Cabeceras de seguridad (Previene Clickjacking y XSS)
+Header set X-Frame-Options "SAMEORIGIN"
+Header set X-XSS-Protection "1; mode=block"
+Header set X-Content-Type-Options "nosniff"
+Header set Referrer-Policy "strict-origin-when-cross-origin"
