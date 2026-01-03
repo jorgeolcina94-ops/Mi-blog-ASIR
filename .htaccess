@@ -1,0 +1,5 @@
+# Indicar a Apache qué archivo usar para el error 404
+ErrorDocument 404 /error404.php
+
+# Opcional: Impedir que se listen las carpetas si no hay un index.php
+Options -Indexes
