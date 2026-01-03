@@ -306,3 +306,27 @@ pre {
 .copy-button:active {
     transform: scale(0.95);
 }
+/* Efecto de cursor parpadeante */
+
+/* Forzamos que el contenedor permita ver el cursor */
+.typing {
+    display: inline-block; /* Ayuda a que el pseudo-elemento se posicione bien */
+    position: relative;
+}
+
+/* El cursor parpadeante con esteroides */
+.typing::after {
+    content: "_"; 
+    display: inline-block;
+    color: var(--accent-color) !important; /* Usamos !important para evitar conflictos */
+    margin-left: 4px;
+    font-weight: bold;
+    visibility: visible !important;
+    animation: terminal-blink 0.8s steps(2, start) infinite;
+}
+
+/* Animación más nítida para terminal */
+@keyframes terminal-blink {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0; }
+}
