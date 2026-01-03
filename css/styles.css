@@ -175,3 +175,134 @@
         @media (max-width: 600px) {
             .hero h1 { font-size: 1.8rem; }
         }
+	/* Estilos para la página de Post Individual */
+	.full-post {
+    		background: var(--bg-card);
+    		padding: 3rem;
+    		border-radius: 12px;
+    		border: 1px solid var(--border-color);
+    		margin-top: 2rem;
+	}
+
+	.full-post h1 {
+    		font-family: var(--font-mono);
+    		color: #fff;
+    		font-size: 2.5rem;
+    		margin-bottom: 0.5rem;
+	}
+
+	.post-meta {
+    		color: var(--text-muted);
+    		font-size: 0.9rem;
+    		margin-bottom: 2rem;
+    		display: flex;
+    		gap: 15px;
+	}
+
+/* El toque Maestro: Bloques de Código estilo Terminal */
+.post-content pre {
+    background: #010409;
+    padding: 1.5rem;
+    border-radius: 8px;
+    border: 1px solid var(--accent-color);
+    font-family: var(--font-mono);
+    color: #e6edf3;
+    overflow-x: auto;
+    margin: 1.5rem 0;
+    position: relative;
+}
+
+/* Simular los botones de una ventana de terminal */
+.post-content pre::before {
+    content: "● ● ●";
+    display: block;
+    margin-bottom: 10px;
+    color: #30363d;
+    letter-spacing: 2px;
+}
+
+.post-content code {
+    background: rgba(35, 134, 54, 0.2);
+    color: var(--accent-color);
+    padding: 0.2rem 0.4rem;
+    border-radius: 4px;
+    font-family: var(--font-mono);
+}
+
+/* --- Mejora de la imagen del post --- */
+.post-image {
+    width: 100%;
+    display: flex;
+    justify-content: center; /* Centra la imagen si es más pequeña que el contenedor */
+    margin: 2rem 0;
+}
+
+.post-image img {
+    max-width: 800px;    /* No deja que la imagen sea más ancha que esto */
+    width: 100%;         /* Se adapta al ancho del móvil */
+    height: auto;        /* Mantiene la proporción */
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.5); /* Sombra para que flote */
+}
+
+/* --- Mejoras de legibilidad --- */
+.post-content {
+    max-width: 800px;
+    margin: 0 auto;
+    font-size: 1.15rem;
+    line-height: 1.8;
+}
+
+/* Estilo para los títulos internos del post */
+.post-content h2, .post-content h3 {
+    margin-top: 2.5rem;
+    color: var(--accent-color);
+    font-family: var(--font-mono);
+}
+
+.post-content p {
+    margin-bottom: 1.5rem;
+    font-size: 1.1rem;
+    color: var(--text-main);
+}
+/* Contenedor del código */
+pre {
+    position: relative; /* Necesario para posicionar el botón */
+    padding-top: 35px !important; /* Espacio para que el botón no tape el comando */
+    background: #0d1117;
+    border: 1px solid #30363d;
+    border-radius: 8px;
+    color: #e6edf3;
+    font-family: 'Fira Code', monospace;
+}
+
+/* Estilo profesional para el botón */
+.copy-button {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: rgba(35, 134, 54, 0.1); /* Fondo sutil verde */
+    color: #238636; /* Color verde terminal */
+    border: 1px solid #238636;
+    padding: 4px 10px;
+    border-radius: 5px;
+    font-size: 0.7rem;
+    font-family: 'Inter', sans-serif;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-transform: uppercase;
+}
+
+/* Efecto al pasar el ratón */
+.copy-button:hover {
+    background: #238636;
+    color: #ffffff;
+    box-shadow: 0 0 8px rgba(35, 134, 54, 0.4);
+}
+
+/* Cuando se pulsa el botón */
+.copy-button:active {
+    transform: scale(0.95);
+}
