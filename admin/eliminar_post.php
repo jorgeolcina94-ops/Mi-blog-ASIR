@@ -6,7 +6,7 @@ if (!isset($_SESSION['usuario_id'])) {
     exit();
 }
 
-include('db/db_config.php');
+include('../db/db_config.php');
 
 if (isset($_GET['id'])) {
     $id = intval($_GET['id']);

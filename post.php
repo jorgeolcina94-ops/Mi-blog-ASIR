@@ -68,7 +68,7 @@ if (!$post) { die("Publicación no encontrada."); }
 
     <div class="card" style="margin-top: 2rem;">
         <h4>Deja un comentario</h4>
-        <form action="agregar_comentario.php" method="POST" style="display: flex; flex-direction: column; gap: 1rem;">
+        <form action="actions/agregar_comentario.php" method="POST" style="display: flex; flex-direction: column; gap: 1rem;">
             <input type="hidden" name="post_id" value="<?php echo $id; ?>">
             <input type="text" name="nombre" placeholder="Tu nombre" required style="padding: 10px; background: #0d1117; color: white; border: 1px solid #30363d;">
             <textarea name="comentario" placeholder="Escribe tu opinión o duda técnica..." rows="4" required style="padding: 10px; background: #0d1117; color: white; border: 1px solid #30363d;"></textarea>

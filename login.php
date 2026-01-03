@@ -19,7 +19,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         if (password_verify($pass, $usuario['password'])) {
             $_SESSION['usuario_id'] = $usuario['id'];
             $_SESSION['usuario_nom'] = $user;
-            header("Location: admin.php");
+            header("Location: admin/admin.php");
             exit();
         } else {
             $error = "Contraseña incorrecta.";

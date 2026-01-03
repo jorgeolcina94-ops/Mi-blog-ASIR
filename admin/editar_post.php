@@ -2,8 +2,8 @@
 session_start();
 if (!isset($_SESSION['usuario_id'])) { header("Location: login.php"); exit(); }
 
-include('db/db_config.php'); 
-include('includes/header.php'); 
+include('../db/db_config.php'); 
+include('../includes/header.php'); 
 
 $mensaje = "";
 $id = intval($_GET['id']);
