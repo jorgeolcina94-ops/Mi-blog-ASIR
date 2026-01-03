@@ -89,6 +89,10 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                 <td style="padding: 12px;"><span class="status-badge"><?php echo htmlspecialchars($row['categoria']); ?></span></td>
                 <td style="padding: 12px;">
                     <a href="editar_post.php?id=<?php echo $row['id']; ?>" style="color: var(--accent-color); text-decoration: none; font-weight: bold;">[ Editar ]</a>
+                    &nbsp;
+   		    <a href="eliminar_post.php?id=<?php echo $row['id']; ?>" 
+                    onclick="return confirm('¿Estás seguro de que quieres eliminar este post? Esta acción no se puede deshacer.');" 
+                    style="color: #da3633; text-decoration: none; font-weight: bold;">[ Borrar ]</a>
                 </td>
             </tr>
             <?php endwhile; ?>
