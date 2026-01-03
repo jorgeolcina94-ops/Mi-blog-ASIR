@@ -66,7 +66,35 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         </form>
     </div>
 </main>
+<hr style="margin: 3rem 0; border: 0; border-top: 1px solid var(--border-color);">
 
+<section>
+    <h3>Gestionar Publicaciones Existentes</h3>
+    <table style="width: 100%; border-collapse: collapse; margin-top: 1rem; background: var(--bg-card); border-radius: 8px; overflow: hidden;">
+        <thead>
+            <tr style="background: #161b22; text-align: left;">
+                <th style="padding: 12px; border-bottom: 1px solid var(--border-color);">Título</th>
+                <th style="padding: 12px; border-bottom: 1px solid var(--border-color);">Categoría</th>
+                <th style="padding: 12px; border-bottom: 1px solid var(--border-color);">Acciones</th>
+            </tr>
+        </thead>
+        <tbody>
+            <?php
+            $sql = "SELECT id, titulo, categoria FROM publicaciones ORDER BY fecha_publicacion DESC";
+            $res = $conn->query($sql);
+            while($row = $res->fetch_assoc()):
+            ?>
+            <tr style="border-bottom: 1px solid #21262d;">
+                <td style="padding: 12px;"><?php echo htmlspecialchars($row['titulo']); ?></td>
+                <td style="padding: 12px;"><span class="status-badge"><?php echo htmlspecialchars($row['categoria']); ?></span></td>
+                <td style="padding: 12px;">
+                    <a href="editar_post.php?id=<?php echo $row['id']; ?>" style="color: var(--accent-color); text-decoration: none; font-weight: bold;">[ Editar ]</a>
+                </td>
+            </tr>
+            <?php endwhile; ?>
+        </tbody>
+    </table>
+</section>
 <?php 
 $conn->close();
 include('includes/footer.php'); 
