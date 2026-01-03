@@ -8,6 +8,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $user = $_POST['username'];
     $pass = $_POST['password'];
     $ip = $_SERVER['HTTP_CF_CONNECTING_IP'] ?? $_SERVER['REMOTE_ADDR'];
+
+    // Contamos fallos en los últimos 15 minutos
+    $minutos = 15;
+    $intentos_maximos = 5;
+    
+    $stmt_check = $conn->prepare("SELECT COUNT(*) as fallos FROM login_attempts WHERE ip_address = ? AND exitoso = 0 AND intento_fecha > DATE_SUB(NOW(), INTERVAL ? MINUTE)");
+    $stmt_check->bind_param("si", $ip, $minutos);
+    $stmt_check->execute();
+    $bloqueo = $stmt_check->get_result()->fetch_assoc();
+
+    if ($bloqueo['fallos'] >= $intentos_maximos) {
+        $error = "Demasiados intentos fallidos. IP bloqueada temporalmente (15 min).";
+    } else {
+
     $stmt = $conn->prepare("SELECT id, password FROM usuarios WHERE username = ?");
     $stmt->bind_param("s", $user);
     $stmt->execute();

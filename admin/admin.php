@@ -150,7 +150,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     </table>
 </section>
 <hr style="margin: 3rem 0; border: 0; border-top: 1px solid var(--border-color);">
+<?php
+// Consulta para ver cuántas IPs hay bloqueadas actualmente
+$sql_bloqueadas = "SELECT COUNT(DISTINCT ip_address) as total FROM login_attempts WHERE exitoso = 0 AND intento_fecha > DATE_SUB(NOW(), INTERVAL 15 MINUTE) GROUP BY ip_address HAVING COUNT(*) >= 5";
+$res_b = $conn->query($sql_bloqueadas);
+$num_bloqueos = $res_b ? $res_b->num_rows : 0;
+?>
 
+<p style="background: <?php echo $num_bloqueos > 0 ? '#da3633' : '#238636'; ?>; padding: 10px; border-radius: 5px; color: white;">
+    <strong>Estado de Seguridad:</strong> <?php echo $num_bloqueos; ?> IP(s) bloqueadas actualmente.
+</p>
 <section>
     <h3>🚨 Últimos Intentos de Acceso</h3>
     <table style="width: 100%; border-collapse: collapse; margin-top: 1rem; background: var(--bg-card); border-radius: 8px;">
