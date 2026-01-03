@@ -9,27 +9,23 @@ $stmt->execute();
 $resultado = $stmt->get_result();
 $post = $resultado->fetch_assoc();
 
-if (!$post) {
-    die("Publicación no encontrada.");
-}
+if (!$post) { die("Publicación no encontrada."); }
 ?>
 
 <main class="container">
-    <article class="full-post">
-        <span class="tag"><?php echo $post['categoria']; ?></span>
-        <h1><?php echo $post['titulo']; ?></h1>
-        <p class="date">Publicado el <?php echo date("d/m/Y", strtotime($post['fecha_publicacion'])); ?></p>
+    <article style="max-width: 800px; margin: 0 auto;">
+        <span class="status-badge"><?php echo $post['categoria']; ?></span>
+        <h1 style="font-size: 2.5rem; margin: 1rem 0;"><?php echo $post['titulo']; ?></h1>
         
         <?php if($post['imagen_url']): ?>
-            <img src="<?php echo $post['imagen_url']; ?>" style="width:100%; border-radius:10px; margin: 2rem 0; border: 1px solid var(--border-color);">
+            <img src="<?php echo $post['imagen_url']; ?>" style="width:100%; border-radius:10px; margin-bottom: 2rem;">
         <?php endif; ?>
 
-        <div class="content" style="white-space: pre-wrap; font-size: 1.1rem;">
-            <?php echo $post['contenido']; ?>
+        <div style="font-size: 1.2rem; line-height: 1.8; color: #c9d1d9;">
+            <?php echo nl2br($post['contenido']); ?>
         </div>
         
-        <br><br>
-        <a href="index.php" style="color: var(--accent-color);">&larr; Volver al listado</a>
+        <br><a href="index.php" style="color: var(--accent-color); text-decoration: none;">&larr; Volver</a>
     </article>
 </main>
 
