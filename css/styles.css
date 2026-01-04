@@ -1,29 +1,29 @@
+/* ==========================================================================
+   1. VARIABLES Y RESET
+   ========================================================================== */
 :root {
-            --bg-body: #0d1117;
-            --bg-card: #161b22;
-            --border-color: #30363d;
-            --accent-color: #238636; /* Verde tipo GitHub / Terminal */
-            --text-main: #c9d1d9;
-            --text-muted: #8b949e;
-            --font-mono: 'Fira Code', monospace;
-        }
+    --bg-body: #0d1117;
+    --bg-card: #161b22;
+    --border-color: #30363d;
+    --accent-color: #238636;
+    --text-main: #c9d1d9;
+    --text-muted: #8b949e;
+    --font-mono: 'Fira Code', monospace;
+}
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: var(--bg-body);
-            color: var(--text-main);
-            line-height: 1.6;
-            padding-top: 60px;
-        }
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg-body);
+    color: var(--text-main);
+    line-height: 1.6;
+    padding-top: 70px; /* Espacio para que el menú fijo no tape nada */
+}
 
-
-/* --- Header / Nav (Versión Móvil ASIR) --- */
+/* ==========================================================================
+   2. NAVEGACIÓN (Arreglada)
+   ========================================================================== */
 nav.navbar {
     position: fixed;
     top: 0;
@@ -31,13 +31,12 @@ nav.navbar {
     background: rgba(13, 17, 23, 0.95);
     border-bottom: 1px solid var(--border-color);
     z-index: 1000;
-    padding: 0; /* Quitamos padding global para manejarlo dentro */
 }
 
 .nav-container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 1rem 10%;
+    padding: 0.8rem 5%;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -51,18 +50,16 @@ nav.navbar {
     font-size: 1.1rem;
 }
 
-/* Lista de enlaces: Eliminamos puntos negros y forzamos fila */
+/* Lista del menú: Flexbox para escritorio */
 ul.nav-links {
-    display: flex;
+    display: flex !important;
     list-style: none !important;
-    margin: 0;
-    padding: 0;
     gap: 20px;
+    margin: 0 !important;
+    padding: 0 !important;
 }
 
-ul.nav-links li {
-    list-style: none !important;
-}
+ul.nav-links li { list-style: none !important; }
 
 ul.nav-links a {
     color: var(--text-muted);
@@ -71,398 +68,189 @@ ul.nav-links a {
     transition: color 0.3s;
 }
 
-ul.nav-links a:hover {
-    color: var(--accent-color);
-}
+ul.nav-links a:hover { color: var(--accent-color); }
 
 /* Botón Hamburguesa (Oculto en PC) */
 .menu-toggle {
     display: none;
     background: none;
-    border: 1px solid var(--accent-color);
+    border: 1px solid var(--border-color);
     border-radius: 4px;
+    padding: 6px;
     cursor: pointer;
-    padding: 5px;
     flex-direction: column;
     gap: 4px;
 }
 
 .menu-toggle span {
     display: block;
-    width: 20px;
+    width: 22px;
     height: 2px;
     background-color: var(--accent-color);
 }
 
-/* --- RESPONSIVE (Móvil) --- */
+/* ==========================================================================
+   3. BUSCADOR GREP (Nuevo Diseño)
+   ========================================================================== */
+.search-box {
+    margin-top: 25px;
+    width: 100%;
+    max-width: 600px;
+}
+
+.search-form {
+    display: flex;
+    align-items: center;
+    background: #010409;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    padding: 8px 15px;
+}
+
+.prompt-sign {
+    color: var(--accent-color);
+    font-family: var(--font-mono);
+    font-weight: bold;
+    margin-right: 12px;
+    white-space: nowrap;
+}
+
+.search-input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    color: var(--text-main);
+    font-family: var(--font-mono);
+    font-size: 1rem;
+    outline: none;
+}
+
+.search-btn {
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 1.2rem;
+    color: var(--text-muted);
+}
+
+.search-btn:hover { color: var(--accent-color); }
+
+/* ==========================================================================
+   4. LAYOUT GENERAL (Hero, Cards, Post)
+   ========================================================================== */
+.container { max-width: 900px; margin: 0 auto; padding: 2rem; }
+
+.hero { 
+    padding: 3rem 0; 
+    border-bottom: 1px solid var(--border-color); 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.hero h1 { font-size: 2.5rem; margin-bottom: 1rem; color: #fff; }
+
+.status-badge {
+    display: inline-flex; align-items: center;
+    background: rgba(35, 134, 54, 0.1); color: var(--accent-color);
+    padding: 0.3rem 0.8rem; border-radius: 20px;
+    font-size: 0.85rem; border: 1px solid var(--accent-color);
+    margin-bottom: 1rem; font-family: var(--font-mono);
+    width: fit-content;
+}
+.status-dot {
+    height: 8px; width: 8px; background-color: var(--accent-color);
+    border-radius: 50%; margin-right: 8px; animation: pulse 2s infinite;
+}
+@keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.4; } 100% { opacity: 1; } }
+
+/* Grid */
+.section-title { 
+    margin: 3rem 0 1.5rem; font-family: var(--font-mono); 
+    border-bottom: 1px solid var(--border-color); padding-bottom: 10px; 
+}
+.lab-grid { 
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; 
+}
+
+/* Tarjetas */
+.card {
+    background: var(--bg-card); border: 1px solid var(--border-color);
+    border-radius: 8px; padding: 1.5rem; transition: transform 0.2s;
+}
+.card:hover { transform: translateY(-3px); border-color: var(--accent-color); }
+.card h3 { color: #f0f6fc; margin: 0.5rem 0; }
+.card p { color: var(--text-muted); font-size: 0.9rem; }
+.card span { color: var(--accent-color); font-size: 0.8rem; font-family: var(--font-mono); }
+.read-more { display: inline-block; margin-top: 10px; color: var(--accent-color); text-decoration: none; font-weight: bold; }
+
+/* Posts completos */
+.full-post {
+    background: var(--bg-card); padding: 3rem;
+    border-radius: 12px; border: 1px solid var(--border-color); margin-top: 2rem;
+}
+.full-post h1 { font-family: var(--font-mono); color: #fff; font-size: 2.5rem; margin-bottom: 0.5rem; }
+.post-meta { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 2rem; display: flex; gap: 15px; }
+.post-content { max-width: 800px; margin: 0 auto; font-size: 1.15rem; line-height: 1.8; }
+.post-content p { margin-bottom: 1.5rem; color: var(--text-main); }
+.post-content h2 { margin-top: 2rem; color: var(--accent-color); font-family: var(--font-mono); }
+
+/* Código y Terminal */
+pre {
+    position: relative; background: #010409 !important;
+    padding: 2.5rem 1rem 1rem 1rem !important; border: 1px solid var(--border-color) !important;
+    border-radius: 8px !important; overflow-x: auto !important; margin: 1.5rem 0;
+    font-family: var(--font-mono); color: #e6edf3;
+}
+pre::before {
+    content: "● ● ●"; display: block; margin-bottom: 10px; color: #30363d; letter-spacing: 2px;
+}
+.copy-button {
+    position: absolute; top: 8px; right: 8px;
+    background: rgba(35, 134, 54, 0.1); color: var(--accent-color);
+    border: 1px solid var(--accent-color); padding: 4px 10px; border-radius: 5px;
+    font-size: 0.7rem; font-family: 'Inter', sans-serif; font-weight: bold;
+    cursor: pointer; text-transform: uppercase; z-index: 10;
+}
+.copy-button:hover { background: var(--accent-color); color: #fff; }
+
+/* Footer */
+footer { 
+    text-align: center; padding: 4rem 0; color: var(--text-muted); 
+    font-size: 0.8rem; border-top: 1px solid var(--border-color); margin-top: 4rem; 
+}
+
+/* ==========================================================================
+   5. RESPONSIVE MÓVIL (Reglas finales)
+   ========================================================================== */
 @media (max-width: 768px) {
-    .menu-toggle {
-        display: flex; /* Mostramos el botón */
-    }
+    .menu-toggle { display: flex; } /* Aparece el botón */
 
     ul.nav-links {
-        display: none; /* Ocultamos el menú por defecto */
-        flex-direction: column;
-        position: absolute;
-        top: 100%; /* Justo debajo de la barra */
-        left: 0;
-        width: 100%;
-        background-color: #0d1117;
-        border-bottom: 1px solid var(--border-color);
-        padding: 20px;
-        text-align: center;
+        display: none !important; /* Menú oculto por defecto */
+        flex-direction: column; position: absolute;
+        top: 100%; left: 0; width: 100%;
+        background-color: #0d1117; border-bottom: 1px solid var(--border-color);
+        padding: 20px !important; text-align: center;
+        box-shadow: 0 10px 20px rgba(0,0,0,0.5);
     }
 
-    /* Clase que activará el JS */
-    ul.nav-links.active {
-        display: flex;
-    }
+    ul.nav-links.active { display: flex !important; } /* Se muestra al activarse */
+    
+    .container { width: 95% !important; padding: 10px !important; }
+    .hero h1, .full-post h1 { font-size: 1.8rem; }
 }
 
-
-
-        /* Contenedor Principal */
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 2rem;
-        }
-
-        /* Hero / Perfil */
-        .hero {
-            padding: 4rem 0;
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        .hero h1 {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            color: #fff;
-        }
-
-        .status-badge {
-            display: inline-flex;
-            align-items: center;
-            background: rgba(35, 134, 54, 0.1);
-            color: var(--accent-color);
-            padding: 0.3rem 0.8rem;
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-family: var(--font-mono);
-            border: 1px solid var(--accent-color);
-        }
-
-        .status-dot {
-            height: 8px;
-            width: 8px;
-            background-color: var(--accent-color);
-            border-radius: 50%;
-            display: inline-block;
-            margin-right: 8px;
-            animation: pulse 2s infinite;
-        }
-
-        @keyframes pulse {
-            0% { opacity: 1; }
-            50% { opacity: 0.4; }
-            100% { opacity: 1; }
-        }
-
-        /* Grid de Laboratorios */
-        .section-title {
-            margin: 3rem 0 1.5rem;
-            font-family: var(--font-mono);
-            display: flex;
-            align-items: center;
-        }
-
-        .section-title::after {
-            content: "";
-            flex: 1;
-            height: 1px;
-            background: var(--border-color);
-            margin-left: 1rem;
-        }
-
-        .lab-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .card {
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 1.5rem;
-            transition: transform 0.2s, border-color 0.2s;
-        }
-
-        .card:hover {
-            transform: translateY(-3px);
-            border-color: var(--accent-color);
-        }
-
-        .card span {
-            font-family: var(--font-mono);
-            font-size: 0.8rem;
-            color: var(--accent-color);
-        }
-
-        .card h3 {
-            margin: 0.5rem 0;
-            color: #f0f6fc;
-        }
-
-        .card p {
-            font-size: 0.9rem;
-            color: var(--text-muted);
-        }
-
-        /* Bloque de código / Scripts */
-        .script-preview {
-            background: #010409;
-            border-radius: 6px;
-            padding: 1rem;
-            font-family: var(--font-mono);
-            font-size: 0.85rem;
-            margin-top: 1rem;
-            overflow-x: auto;
-            border: 1px solid var(--border-color);
-        }
-
-        footer {
-            text-align: center;
-            padding: 4rem 0;
-            color: var(--text-muted);
-            font-size: 0.8rem;
-            border-top: 1px solid var(--border-color);
-            margin-top: 4rem;
-        }
-
-        /* Responsive */
-        @media (max-width: 600px) {
-            .hero h1 { font-size: 1.8rem; }
-        }
-	/* Estilos para la página de Post Individual */
-	.full-post {
-    		background: var(--bg-card);
-    		padding: 3rem;
-    		border-radius: 12px;
-    		border: 1px solid var(--border-color);
-    		margin-top: 2rem;
-	}
-
-	.full-post h1 {
-    		font-family: var(--font-mono);
-    		color: #fff;
-    		font-size: 2.5rem;
-    		margin-bottom: 0.5rem;
-	}
-
-	.post-meta {
-    		color: var(--text-muted);
-    		font-size: 0.9rem;
-    		margin-bottom: 2rem;
-    		display: flex;
-    		gap: 15px;
-	}
-
-/* El toque Maestro: Bloques de Código estilo Terminal */
-.post-content pre {
-    background: #010409;
-    padding: 1.5rem;
-    border-radius: 8px;
-    border: 1px solid var(--accent-color);
-    font-family: var(--font-mono);
-    color: #e6edf3;
-    overflow-x: auto;
-    margin: 1.5rem 0;
-    position: relative;
-}
-
-/* Simular los botones de una ventana de terminal */
-.post-content pre::before {
-    content: "● ● ●";
-    display: block;
-    margin-bottom: 10px;
-    color: #30363d;
-    letter-spacing: 2px;
-}
-
-.post-content code {
-    background: rgba(35, 134, 54, 0.2);
-    color: var(--accent-color);
-    padding: 0.2rem 0.4rem;
-    border-radius: 4px;
-    font-family: var(--font-mono);
-}
-
-/* --- Mejora de la imagen del post --- */
-.post-image {
-    width: 100%;
-    display: flex;
-    justify-content: center; /* Centra la imagen si es más pequeña que el contenedor */
-    margin: 2rem 0;
-}
-
-.post-image img {
-    max-width: 800px;    /* No deja que la imagen sea más ancha que esto */
-    width: 100%;         /* Se adapta al ancho del móvil */
-    height: auto;        /* Mantiene la proporción */
-    border-radius: 8px;
-    border: 1px solid var(--border-color);
-    box-shadow: 0 10px 30px rgba(0,0,0,0.5); /* Sombra para que flote */
-}
-
-/* --- Mejoras de legibilidad --- */
-.post-content {
-    max-width: 800px;
-    margin: 0 auto;
-    font-size: 1.15rem;
-    line-height: 1.8;
-}
-
-/* Estilo para los títulos internos del post */
-.post-content h2, .post-content h3 {
-    margin-top: 2.5rem;
-    color: var(--accent-color);
-    font-family: var(--font-mono);
-}
-
-.post-content p {
-    margin-bottom: 1.5rem;
-    font-size: 1.1rem;
-    color: var(--text-main);
-}
-/* Contenedor del código */
-pre {
-    position: relative;
-    background: #010409 !important;
-    padding: 2.5rem 1rem 1rem 1rem !important; /* Más espacio arriba para el botón */
-    border: 1px solid #30363d !important;
-    border-radius: 8px !important;
-    overflow-x: auto !important;
-    white-space: pre;
-    margin: 1.5rem 0;
-
-    /* REGLA PARA FIREFOX */
-    scrollbar-width: thin;
-    scrollbar-color: #30363d #010409; /* Color de la barra y color del fondo */
-}
-
-/* Estilo profesional para el botón */
-.copy-button {
-    position: absolute;
-    top: 8px;
-    right: 8px;
-    background: rgba(35, 134, 54, 0.1); /* Fondo sutil verde */
-    color: #238636; /* Color verde terminal */
-    border: 1px solid #238636;
-    padding: 4px 10px;
-    border-radius: 5px;
-    font-size: 0.7rem;
-    font-family: 'Inter', sans-serif;
-    font-weight: bold;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    text-transform: uppercase;
-    z-index: 10; /* Asegura que esté por encima de todo */
-    backdrop-filter: blur(4px); /* Efecto cristal para que no tape el código */
-}
-
-/* Efecto al pasar el ratón */
-.copy-button:hover {
-    background: #238636;
-    color: #ffffff;
-    box-shadow: 0 0 8px rgba(35, 134, 54, 0.4);
-}
-
-/* Cuando se pulsa el botón */
-.copy-button:active {
-    transform: scale(0.95);
-}
-/* Efecto de cursor parpadeante */
-
-/* Forzamos que el contenedor permita ver el cursor */
-.typing {
-    display: inline-block; /* Ayuda a que el pseudo-elemento se posicione bien */
-    position: relative;
-}
-
-/* El cursor parpadeante con esteroides */
+/* --- EFECTO DE ESCRITURA (CURSOR) --- */
 .typing::after {
     content: "_"; 
     display: inline-block;
-    color: var(--accent-color) !important; /* Usamos !important para evitar conflictos */
-    margin-left: 4px;
+    color: var(--accent-color);
     font-weight: bold;
-    visibility: visible !important;
-    animation: terminal-blink 0.8s steps(2, start) infinite;
+    margin-left: 5px;
+    animation: blink-cursor 0.8s steps(2, start) infinite;
 }
 
-/* Animación más nítida para terminal */
-@keyframes terminal-blink {
+@keyframes blink-cursor {
     0%, 100% { opacity: 1; }
     50% { opacity: 0; }
-}
-/* --- Personalización de la "Barra Fea" (Scrollbar) --- */
-/* --- REGLAS PARA CHROME, EDGE Y SAFARI --- */
-/* 1. Ancho de la barra */
-pre::-webkit-scrollbar {
-    height: 8px !important; /* Barra horizontal */
-    width: 8px !important;  /* Barra vertical (si existiera) */
-}
-
-/* 2. Fondo del carril */
-pre::-webkit-scrollbar-track {
-    background: #010409 !important; 
-    border-radius: 8px;
-}
-
-/* 3. La parte que se mueve (el "pulgar") */
-pre::-webkit-scrollbar-thumb {
-    background-color: #30363d !important;
-    border-radius: 20px !important;
-    border: 2px solid #010409 !important; /* Crea un pequeño margen visual */
-}
-
-/* 4. Cuando pasas el ratón por encima */
-pre::-webkit-scrollbar-thumb:hover {
-    background-color: var(--accent-color) !important;
-}
-
-
-/* --- Ajustes para Móviles y Tablets --- */
-@media (max-width: 768px) {
-    /* Hacemos que el contenedor principal use todo el ancho */
-    .container {
-        width: 95% !important;
-        padding: 10px !important;
-    }
-
-    /* Ajustamos la terminal (bloque PRE) */
-    pre {
-        font-size: 0.85rem !important; /* Aumentamos un poco el tamaño para legibilidad */
-        padding: 2.5rem 0.7rem 1rem 0.7rem !important; /* Reducimos el padding lateral */
-        line-height: 1.4 !important;
-        border-radius: 4px !important;
-    }
-
-    /* El botón de copiar debe ser más grande para que sea fácil de pulsar con el dedo */
-    .copy-button {
-        padding: 8px 12px !important;
-        font-size: 0.75rem !important;
-        top: 5px;
-        right: 5px;
-    }
-
-    /* Ajustamos los títulos para que no ocupen toda la pantalla */
-    h1 {
-        font-size: 1.5rem !important;
-    }
-    
-    h2 {
-        font-size: 1.2rem !important;
-    }
 }
