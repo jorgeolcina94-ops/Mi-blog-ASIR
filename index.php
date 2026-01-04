@@ -1,17 +1,50 @@
 <?php 
+// 1. Incluimos cabecera y DB
 include('includes/header.php'); 
 include('db/db_config.php'); 
 
+// --- LÓGICA DE MONITORIZACIÓN (SYSADMIN DASHBOARD) ---
+
+// A. Temperatura CPU
+// Leemos el sensor térmico de la Raspberry Pi
+$temp_raw = @file_get_contents('/sys/class/thermal/thermal_zone0/temp');
+if ($temp_raw !== false) {
+    $cpu_temp = round($temp_raw / 1000); // Convertir miligrados a grados
+} else {
+    $cpu_temp = "N/A"; // Por si no es una Raspberry o falla
+}
+
+// B. Uso de RAM
+// Ejecutamos 'free -h' para obtener la memoria disponible en formato humano (ej: 400Mi)
+$ram_free = shell_exec("free -h | awk '/Mem:/ {print $7}'");
+$ram_free = trim($ram_free); // Limpiamos espacios en blanco
+
+// C. Lógica de Colores (Semáforo)
+// Verde (<55°C), Naranja (55-70°C), Rojo (>70°C)
+if ($cpu_temp < 55) {
+    $status_color = "#238636"; // Verde (Ok)
+    $status_msg = "System Normal";
+} elseif ($cpu_temp >= 55 && $cpu_temp < 70) {
+    $status_color = "#e3b341"; // Naranja (Warning)
+    $status_msg = "High Load";
+} else {
+    $status_color = "#da3633"; // Rojo (Danger)
+    $status_msg = "Overheating!";
+}
+
+// 2. Consulta de artículos
 $sql = "SELECT id, titulo, resumen, categoria, fecha_publicacion FROM publicaciones ORDER BY fecha_publicacion DESC LIMIT 6";
 $resultado = $conn->query($sql);
 ?>
 
 <main class="container">
     <header class="hero">
-        <div class="status-badge">
-            <span class="status-dot"></span> System Status: Online
+        <div class="status-badge" style="border-color: <?php echo $status_color; ?>; color: <?php echo $status_color; ?>;">
+            <span class="status-dot" style="background-color: <?php echo $status_color; ?>;"></span>
+            RPi 3A+: <?php echo $cpu_temp; ?>°C | RAM Libre: <?php echo $ram_free; ?>
         </div>
-        <h1>Diario de un Administrador de Sistemas</h1>
+
+        <h1 id="type-main">Diario de un Administrador de Sistemas</h1>
         <p>Documentando laboratorios y despliegues en mi Raspberry Pi 3A+.</p>
 
         <div class="search-box">
