@@ -9,12 +9,21 @@
     <link rel="icon" href="/uploads/faviconweb.png">
 </head>
 <body>
-    <nav>
-        <div class="logo">~/asir-student/jorge</div>
-        <div class="nav-links">
-            <a href="/index.php">Inicio</a>
-            <a href="#labs">Laboratorios</a>
-            <a href="#scripts">Scripts</a>
-	    <a href="/recursos.php">Recursos</a>
+<nav class="navbar">
+        <div class="nav-container">
+            <a href="/index.php" class="logo">~/asir-student/jorge</a>
+
+            <button class="menu-toggle" id="mobile-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <ul class="nav-links" id="nav-list">
+                <li><a href="/index.php">Inicio</a></li>
+                <li><a href="#labs">Laboratorios</a></li>
+                <li><a href="#scripts">Scripts</a></li>
+                <li><a href="/recursos.php">Recursos</a></li>
+            </ul>
         </div>
     </nav>

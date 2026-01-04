@@ -22,35 +22,104 @@
             padding-top: 60px;
         }
 
-        /* Header / Nav */
-        nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background: rgba(13, 17, 23, 0.95);
-            border-bottom: 1px solid var(--border-color);
-            padding: 1rem 10%;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            z-index: 1000;
-        }
 
-        .logo {
-            font-family: var(--font-mono);
-            font-weight: bold;
-            color: var(--accent-color);
-        }
+/* --- Header / Nav (Versión Móvil ASIR) --- */
+nav.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: rgba(13, 17, 23, 0.95);
+    border-bottom: 1px solid var(--border-color);
+    z-index: 1000;
+    padding: 0; /* Quitamos padding global para manejarlo dentro */
+}
 
-        .nav-links a {
-            color: var(--text-muted);
-            text-decoration: none;
-            margin-left: 1.5rem;
-            font-size: 0.9rem;
-            transition: color 0.3s;
-        }
+.nav-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 1rem 10%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 
-        .nav-links a:hover { color: var(--accent-color); }
+.logo {
+    font-family: var(--font-mono);
+    font-weight: bold;
+    color: var(--accent-color);
+    text-decoration: none;
+    font-size: 1.1rem;
+}
+
+/* Lista de enlaces: Eliminamos puntos negros y forzamos fila */
+ul.nav-links {
+    display: flex;
+    list-style: none !important;
+    margin: 0;
+    padding: 0;
+    gap: 20px;
+}
+
+ul.nav-links li {
+    list-style: none !important;
+}
+
+ul.nav-links a {
+    color: var(--text-muted);
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: color 0.3s;
+}
+
+ul.nav-links a:hover {
+    color: var(--accent-color);
+}
+
+/* Botón Hamburguesa (Oculto en PC) */
+.menu-toggle {
+    display: none;
+    background: none;
+    border: 1px solid var(--accent-color);
+    border-radius: 4px;
+    cursor: pointer;
+    padding: 5px;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.menu-toggle span {
+    display: block;
+    width: 20px;
+    height: 2px;
+    background-color: var(--accent-color);
+}
+
+/* --- RESPONSIVE (Móvil) --- */
+@media (max-width: 768px) {
+    .menu-toggle {
+        display: flex; /* Mostramos el botón */
+    }
+
+    ul.nav-links {
+        display: none; /* Ocultamos el menú por defecto */
+        flex-direction: column;
+        position: absolute;
+        top: 100%; /* Justo debajo de la barra */
+        left: 0;
+        width: 100%;
+        background-color: #0d1117;
+        border-bottom: 1px solid var(--border-color);
+        padding: 20px;
+        text-align: center;
+    }
+
+    /* Clase que activará el JS */
+    ul.nav-links.active {
+        display: flex;
+    }
+}
+
+
 
         /* Contenedor Principal */
         .container {

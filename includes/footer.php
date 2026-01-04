@@ -1,5 +1,17 @@
 <script>
 document.addEventListener('DOMContentLoaded', () => {
+
+	// --- Lógica del Menú Móvil ---
+    const menuBtn = document.getElementById('mobile-menu');
+    const navList = document.getElementById('nav-list');
+
+    if (menuBtn && navList) {
+        menuBtn.addEventListener('click', () => {
+            navList.classList.toggle('active');
+        });
+    }
+
+
     // Buscamos todos los bloques <pre> en cualquier página
     document.querySelectorAll('pre').forEach((block) => {
         // Creamos el botón
