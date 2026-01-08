@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ASIR Tech Blog | Explorando el Sistema | Jorge Olcina</title>
     <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500&family=Inter:wght@300;400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="/css/styles.css?v=Final">
+    <link rel="stylesheet" href="/css/styles.css?v=1.2">
     <link rel="icon" href="/uploads/faviconweb.png">
 </head>
 <body>

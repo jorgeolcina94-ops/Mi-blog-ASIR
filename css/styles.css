@@ -196,9 +196,9 @@ ul.nav-links a:hover { color: var(--accent-color); }
 
 /* Código y Terminal */
 pre {
-    position: relative; background: #010409 !important;
-    padding: 2.5rem 1rem 1rem 1rem !important; border: 1px solid var(--border-color) !important;
-    border-radius: 8px !important; overflow-x: auto !important; margin: 1.5rem 0;
+    position: relative; background: #010409; 
+    padding: 2.5rem 1rem 1rem 1rem ; border: 1px solid var(--border-color);
+    border-radius: 8px ; overflow-x: auto ; margin: 1.5rem 0;
     font-family: var(--font-mono); color: #e6edf3;
 }
 pre::before {
@@ -253,4 +253,97 @@ footer {
 @keyframes blink-cursor {
     0%, 100% { opacity: 1; }
     50% { opacity: 0; }
+}
+
+/* ==========================================================================
+   ESTILO DE LA BARRA DE DESPLAZAMIENTO (HORIZONTAL)
+   ========================================================================== */
+
+/* 1. Tamaño de la barra (altura para barras horizontales) */
+pre::-webkit-scrollbar {
+    height: 12px !important; /* Un poco más gruesa para que se note el cambio */
+    display: block !important;
+}
+/* 2. El carril o fondo de la barra */
+pre::-webkit-scrollbar-track {
+    background: #0d1117 !important; /* Fondo ultra oscuro */
+    border-radius: 10px !important;
+    border: 1px solid #30363d !important;
+}
+/* 3. El "puntero" o pieza que se mueve */
+pre::-webkit-scrollbar-thumb {
+    background: #30363d !important; /* fondo oscuro */
+    border-radius: 10px !important;
+    border: 2px solid #0d1117 !important;
+}
+/* ==========================================================================
+   SECCIÓN DE COMENTARIOS (Separada)
+   ========================================================================== */
+
+.comment-card {
+    margin-top: 3rem;
+    max-width: 600px; /* Ancho controlado */
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.comment-card h4 {
+    margin-bottom: 1.5rem;
+    color: var(--accent-color);
+    font-family: var(--font-mono);
+}
+
+.comment-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.comment-form input[type="text"],
+.comment-form textarea {
+    padding: 12px;
+    background: var(--bg-body);
+    color: white;
+    border: 1px solid var(--border-color);
+    border-radius: 6px;
+    font-family: var(--font-mono);
+    outline: none;
+}
+
+.comment-form input:focus,
+.comment-form textarea:focus {
+    border-color: var(--accent-color);
+}
+
+.comment-form textarea {
+    resize: vertical; /* Permite estirar solo hacia abajo */
+}
+
+.btn-comment {
+    width: fit-content;
+    align-self: center;
+    padding: 10px 30px;
+    font-weight: bold;
+}
+/* Contenedor para alinear la lista y los avisos */
+.comments-list {
+    max-width: 600px;
+    margin: 0 auto 2rem auto; /* Centrado y espacio abajo */
+}
+
+/* Estilo para cada comentario individual */
+.comment-item {
+    background: #161b22;
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    border-left: 4px solid var(--accent-color);
+}
+
+/* Mensaje cuando no hay comentarios */
+.no-comments {
+    text-align: center; /* Centramos el texto dentro del bloque */
+    color: var(--text-muted);
+    font-family: var(--font-mono);
+    padding: 20px;
 }

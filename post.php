@@ -26,7 +26,7 @@ if (!$post) { die("Publicación no encontrada."); }
 
          <?php if(!empty($post['imagen_url'])): ?>
             <div class="post-image">
-                <img src="<?php echo $post['imagen_url']; ?>" alt="Captura técnica">
+                <img src="<?php echo $post['imagen_url']; ?>" alt="Captura técnica" style="max-width: 100%; height: auto; border-radius: 8px;">
             </div>
         <?php endif; ?>
 
@@ -46,7 +46,7 @@ if (!$post) { die("Publicación no encontrada."); }
 
 <!-- Zona de Comentarios -->
 <section class="comments-section" style="margin-top: 4rem; border-top: 1px solid var(--border-color); padding-top: 2rem;">
-    <h3>💬 Comentarios</h3>
+    <h3 class="card comment-card">💬 Comentarios</h3>
 
     <?php
     $stmt_com = $conn->prepare("SELECT nombre, comentario, fecha FROM comentarios WHERE post_id = ? ORDER BY fecha DESC");
@@ -63,18 +63,26 @@ if (!$post) { die("Publicación no encontrada."); }
             </div>
         <?php endwhile;
     else: ?>
-        <p style="color: var(--text-muted);">No hay comentarios aún. ¡Sé el primero!</p>
+		<div class="no-comments">
+                <p>No hay comentarios aún. ¡Sé el primero!</p>
+            	</div>
     <?php endif; $stmt_com->close(); ?>
 
-    <div class="card" style="margin-top: 2rem;">
-        <h4>Deja un comentario</h4>
-        <form action="actions/agregar_comentario.php" method="POST" style="display: flex; flex-direction: column; gap: 1rem;">
-            <input type="hidden" name="post_id" value="<?php echo $id; ?>">
-            <input type="text" name="nombre" placeholder="Tu nombre" required style="padding: 10px; background: #0d1117; color: white; border: 1px solid #30363d;">
-            <textarea name="comentario" placeholder="Escribe tu opinión o duda técnica..." rows="4" required style="padding: 10px; background: #0d1117; color: white; border: 1px solid #30363d;"></textarea>
-            <button type="submit" class="btn">Enviar Comentario</button>
-        </form>
-    </div>
+	<div class="card comment-card">
+    		<h4>Deja un comentario</h4>
+    
+    		<form action="actions/agregar_comentario.php" method="POST" class="comment-form">
+        		<input type="hidden" name="post_id" value="<?php echo $id; ?>">
+        
+        		<input type="text" name="nombre" placeholder="Tu nombre" required>
+        
+       			 <textarea name="comentario" placeholder="Escribe tu opinión o duda técnica..." rows="4" required></textarea>
+        
+        		<button type="submit" class="btn btn-comment">
+            		Enviar Comentario
+        		</button>
+    		</form>
+	</div>
 </section>
 
 <?php 
