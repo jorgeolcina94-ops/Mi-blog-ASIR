@@ -83,39 +83,41 @@ $resultado = $conn->query($sql);
 
     <section id="scripts">
         <h2 class="section-title">02. Scripts de Automatización</h2>
-        <div class="card" style="width: 100%;">
-            <span>Bash</span>
+        <div class="card">
+            <span  class="status-badge" >Bash</span>
             <h3>Sync GitHub</h3>
             <p>Automatizando el despliegue de mi blog con Webhooks.</p>
+	    <code>Status: Operational</code>
+	    <a href="recursos.php" class="read-more">Ver Script</a>
         </div>
 
 	<div class="card">
-    		<span class="status-badge" style="background: #0051ad;">DNS</span>
+    		<span class="status-badge">DNS</span>
     		<h3>Cloudflare DDNS</h3>
     		<p>Actualización automática de la IP pública en yoryo.es para evitar pérdida de conexión.</p>
     		<div class="card-footer">
         	<code>Status: Operational</code>
-        	<a href="recursos.php" class="btn-small">Ver Script</a>
+        	<a href="recursos.php" class="read-more">Ver Script</a>
     		</div>
 	</div>
 	
 	<div class="card">
-    		<span class="status-badge" style="background: #2ea043;">Security</span>
+    		<span class="status-badge">Security</span>
     		<h3>Smart Backup</h3>
     		<p>Sistema automatizado de copias de seguridad (DB + Archivos) con rotación mensual de backups.</p>
     		<div class="card-footer">
         	<code>Last: 04/01/2026</code>
-        	<a href="recursos.php" class="btn-small">Configuración</a>
+        	<a href="recursos.php" class="read-more">Configuración</a>
     		</div>
 	</div>
 
 	<div class="card">
-    		<span class="status-badge" style="background: #f38020;">Tunnel</span>
+    		<span class="status-badge">Tunnel</span>
     		<h3>Cloudflare Tunnel</h3>
    		<p>Monitor de conexión segura cloudflared. Mantiene el blog accesible saltando el CG-NAT de la red.</p>
     		<div class="card-footer">
         	<code>Status: Active (E2EE)</code>
-        	<a href="recursos.php" class="btn-small">Configuración</a>
+        	<a href="recursos.php" class="read-more">Configuración</a>
     		</div>
 	</div>
 

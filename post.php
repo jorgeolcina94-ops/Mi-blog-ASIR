@@ -39,7 +39,7 @@ if (!$post) { die("Publicación no encontrada."); }
         </div>
         
         <footer style="margin-top: 3rem; padding-top: 1rem; border-top: 1px solid var(--border-color);">
-            <a href="index.php" class="btn" style="text-decoration: none;">&larr; Volver al Dashboard</a>
+            <a href="index.php" class="read-more">&larr; Volver al Dashboard</a>
         </footer>
     </article>
 </main>
